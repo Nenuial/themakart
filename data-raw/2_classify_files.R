@@ -35,7 +35,7 @@ cat_codes <- categories$cat_code %>%
    unique()
 
 #Define the names the ID and name columns can take
-id_names <- c("ID0", "Primary_ID", "BEZIRKSNUM", "GDENR", "ID_AMGR", "ID_AMRE", "VOGENR")
+id_names <- c("ID0", "Primary_ID", "Primary.ID", "BEZIRKSNUM", "BEZIRKSNR", "GDENR", "ID_AMGR", "ID_AMRE", "VOGENR")
 name_names <- c("ID1", "Secondary_", "NAME", "NAME2", "GDENAME", "NAME_AMGR", "NAME_AMRE", "VOGENAME")
 
 # Function to get the parameters
@@ -61,7 +61,8 @@ read_sf <- function(path) {
 
    temp %>%
       dplyr::select(id = column_names[column_names %in% id_names],
-                    name = column_names[column_names %in% name_names])
+                    name = column_names[column_names %in% name_names]) %>%
+      dplyr::mutate(id = as.integer(id))
 }
 
 # Find all shapefiles

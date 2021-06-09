@@ -11,7 +11,7 @@ thema_map <- function(category = c("inst", "rrep", "anal", "rtyp", "inke", "topo
                       geometry, year, level = c("gf", "vf")) {
   category <- match.arg(category)
   level <- match.arg(level)
-  require(sf)
+  suppressPackageStartupMessages(require(sf))
 
   get(category) %>%
     dplyr::filter(code == geometry, year == year, geometrylevel == level) %>%
@@ -27,6 +27,7 @@ thema_map <- function(category = c("inst", "rrep", "anal", "rtyp", "inke", "topo
 #' @export
 thema_topo <- function(geometry = c("flus", "seen", "stkt")) {
   geometry <- match.arg(geometry)
+  suppressPackageStartupMessages(require(sf))
 
   topo %>%
     dplyr::filter(code == geometry) %>%
